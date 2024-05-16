@@ -66,12 +66,17 @@ export interface IEventInfo extends Event { // Event Information
   description: string
   todoId?: string
   color?: string
+  start?: Date
+  end?: Date
 }
 
 export interface EventFormData { // When user selects time slot, then this data is used to add event
   description: string
   todoId?: string
   color?: string
+  allDay: boolean
+  start?: Date
+  end?: Date
 }
 
 
@@ -91,6 +96,9 @@ const initialEventFormState: EventFormData = {
     description: "",
     todoId: undefined,
     color: "#b64fc8",
+    allDay: false, // It is to ensure the event for entire day
+    start: undefined,
+    end: undefined,
 }
 
 const initialDatePickerEventFormData: DatePickerEventFormData = {
@@ -258,6 +266,7 @@ const EventCalendar = () => {
                             eventFormData={eventFormData}
                             setEventFormData={setEventFormData}
                             onAddEvent={onAddEvent}
+                            currentEvent={currentEvent}
                             todos={todos}
                         />
 

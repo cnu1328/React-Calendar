@@ -1,6 +1,5 @@
-
-import { Dispatch, SetStateAction, ChangeEvent ,MouseEvent } from "react";
-import { EventFormData, ITodo } from "./EventCalendar";
+import { Dispatch, SetStateAction, ChangeEvent, MouseEvent } from "react";
+import { EventFormData, ITodo, IEventInfo } from "./EventCalendar";
 import { 
     Autocomplete, 
     Box, 
@@ -10,54 +9,63 @@ import {
     DialogTitle, 
     TextField,
     DialogActions,
-    Button 
+    Button
 } from "@mui/material";
 import { HexColorPicker } from "react-colorful";
+import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
+type CurrentEventType = Event | IEventInfo | null;
 interface IProps {
-    open: boolean
-    handleClose: Dispatch<SetStateAction<void>>
-    eventFormData: EventFormData
-    setEventFormData: Dispatch<SetStateAction<EventFormData>>
-    onAddEvent: (e : MouseEvent<HTMLButtonElement>) => void
-    todos: ITodo[]
+    open: boolean;
+    handleClose: Dispatch<SetStateAction<void>>;
+    eventFormData: EventFormData;
+    setEventFormData: Dispatch<SetStateAction<EventFormData>>;
+    onAddEvent: (e: MouseEvent<HTMLButtonElement>) => void;
+    currentEvent: CurrentEventType;
+    todos: ITodo[];
 }
 
-export const AddEventModal = ({open, handleClose, eventFormData, setEventFormData, onAddEvent, todos} : IProps) => {
+export const AddEventModal = ({
+    open, 
+    handleClose, 
+    eventFormData, 
+    setEventFormData, 
+    onAddEvent, 
+    currentEvent,
+    todos
+}: IProps) => {
 
-    const { description, color } = eventFormData;
+    const { description, color, start } = eventFormData;
 
     const onClose = () => handleClose();
 
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         setEventFormData((prevState) => ({
             ...prevState, [event.target.name]: event.target.value,
-        }))
+        }));
     }
 
-    const handleTodoChange = (_ : React.SyntheticEvent, value: ITodo | null) => {
+    const handleTodoChange = (_: React.SyntheticEvent, value: ITodo | null) => {
         setEventFormData((prevState) => ({
             ...prevState,
             todoId: value?._id,
-        }))
+        }));
     }
 
     const handleColorChange = (color: string) => {
-    setEventFormData((prevState) => ({
-        ...prevState,
-        color: color,
-    }));
+        setEventFormData((prevState) => ({
+            ...prevState,
+            color: color,
+        }));
     };
 
-
     return (
-        
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Add Event</DialogTitle>
-            
             <DialogContent>
                 <DialogContentText>
-                    To add a event, please fill in the information below. 
+                    To add an event, please fill in the information below. 
                 </DialogContentText>
 
                 <Box component="form">
@@ -72,6 +80,41 @@ export const AddEventModal = ({open, handleClose, eventFormData, setEventFormDat
                         variant="outlined"
                         onChange={onChange}
                     />
+
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <Box mb={2} mt={5}>
+                            <DateTimePicker
+                                label="Start date"
+                                value={currentEvent?.start}
+                                ampm={true}
+                                minutesStep={30}
+                                onChange={(newValue) =>
+                                    setEventFormData((prevState) => ({
+                                        ...prevState,
+                                        start: new Date(newValue!),
+                                    }))
+                                }
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </Box>
+
+                        <Box mb={2}>
+                            <DateTimePicker
+                                label="End date"
+                                minDate={start}
+                                minutesStep={30}
+                                ampm={true}
+                                value={currentEvent?.end}
+                                onChange={(newValue) =>
+                                    setEventFormData((prevState) => ({
+                                        ...prevState,
+                                        end: new Date(newValue!),
+                                    }))
+                                }
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </Box>
+                    </LocalizationProvider>
 
                     <Box mt={3} sx={{ display: "flex", justifyContent: "space-around" }}>
                         <HexColorPicker color={color} onChange={handleColorChange} />
@@ -88,6 +131,7 @@ export const AddEventModal = ({open, handleClose, eventFormData, setEventFormDat
                         renderInput={(params) => <TextField {...params} label="Todo" />}
                     />
 
+                    
                 </Box>
             </DialogContent>
 
@@ -100,8 +144,6 @@ export const AddEventModal = ({open, handleClose, eventFormData, setEventFormDat
                     Add
                 </Button>
             </DialogActions>
-
         </Dialog>
     );
 }
-
