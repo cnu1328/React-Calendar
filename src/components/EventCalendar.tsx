@@ -20,7 +20,8 @@ import enUS from "date-fns/locale/en-US";
 import { 
   Calendar, 
   type Event, 
-  dateFnsLocalizer 
+  dateFnsLocalizer,
+  SlotInfo 
 } from "react-big-calendar"; //It is for main calendar functionalities
 
 import "react-big-calendar/lib/css/react-big-calendar.css"; // react-big-calendar stylings
@@ -117,7 +118,7 @@ const EventCalendar = () => {
     const [openSlot, setOpenSlot] = useState(false); // This state is used to open popup, when user selects the timeslot
     const [openDatepickerModal, setOpenDatepickerModal] = useState(false); // It is to open popup, when user clicks on plusIcon Button
     const [openTodoModal, setOpenTodoModal] = useState(false); // It is to open popup, When user clicks on AddTodo(to add Todo colorings)
-    const [currentEvent, setCurrentEvent] = useState<Event | IEventInfo | null>(null); // This state is used to point the Current Event
+    const [currentEvent, setCurrentEvent] = useState<IEventInfo | null>(null); // This state is used to point the Current Event
     
     const [eventInfoModal, setEventInfoModal] = useState(false); // It is to open popup, when user clicks on existing event
 
@@ -157,10 +158,22 @@ const EventCalendar = () => {
 
     // Function handles
 
-    const handleSelectSlot = (event: Event) => { // This function is to handle to open popup(when user selects time slot)
+    const handleSelectSlot = (slotInfo: SlotInfo) => {
+        setCurrentEvent({
+            _id: '', 
+            description: '',
+            start: slotInfo.start,
+            end: slotInfo.end,
+            color: '#000000',
+            todoId: '',
+        });
         setOpenSlot(true);
-        setCurrentEvent(event);
-    }
+    };
+
+    // const handleSelectSlot = (event: IEventInfo) => { // This function is to handle to open popup(when user selects time slot)
+    //     setOpenSlot(true);
+    //     setCurrentEvent(event);
+    // }
 
     const handleSelectEvent = (event: IEventInfo) => { // This function is to handle to open popup(When user clicks on existing event)
         setCurrentEvent(event);

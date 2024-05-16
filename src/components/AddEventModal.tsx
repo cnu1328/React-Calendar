@@ -15,7 +15,7 @@ import { HexColorPicker } from "react-colorful";
 import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
-type CurrentEventType = Event | IEventInfo | null;
+type CurrentEventType = IEventInfo | null;
 interface IProps {
     open: boolean;
     handleClose: Dispatch<SetStateAction<void>>;
