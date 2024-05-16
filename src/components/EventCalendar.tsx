@@ -28,7 +28,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css"; // react-big-calenda
 import "../../public/css/CustomHeader.css"; // Custom stylings for react-big-calendar
 import { nanoid } from 'nanoid'; //To generate Unique ID(for each event in the calendar and each Todo Coloring)
 
-import { useState, MouseEvent } from "react"; //React Hooks
+import { useState, MouseEvent, useEffect } from "react"; //React Hooks
 
 import { EventInfo } from "./EventInfo"; // This component is used for displaying the discription of event in the calendar
 import { AddEventModal } from "./AddEventModal"; // This component is used for Adding Events, When user selects the time slot(by dragging or just one click)
@@ -113,8 +113,34 @@ const EventCalendar = () => {
     
     const [eventInfoModal, setEventInfoModal] = useState(false); // It is to open popup, when user clicks on existing event
 
-    const [events, setEvents] = useState<IEventInfo[]>([]); //This state to store all events
-    const [todos, setTodos] = useState<ITodo[]>([]); // This state to store all Todo Colors
+    const [events, setEvents] = useState<IEventInfo[]>(() => {
+        const savedEvents = localStorage.getItem('events');
+        if (savedEvents) {
+            const parsedEvents = JSON.parse(savedEvents);
+            return parsedEvents.map((event: IEventInfo) => ({
+                ...event,
+                start: event.start ? new Date(event.start) : undefined,
+                end: event.end ? new Date(event.end) : undefined,
+            }));
+        }
+        return [];
+    });
+
+    const [todos, setTodos] = useState<ITodo[]>(() => {
+        const savedTodos = localStorage.getItem('todos');
+        return savedTodos ? JSON.parse(savedTodos) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem('events', JSON.stringify(events));
+    }, [events]);
+
+    useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }, [todos]);
+
+    // const [events, setEvents] = useState<IEventInfo[]>([]); 
+    // const [todos, setTodos] = useState<ITodo[]>([]); 
 
     const [eventFormData, setEventFormData] = useState<EventFormData>(initialEventFormState); // Event Form Data(When user selects time Slot)
     
