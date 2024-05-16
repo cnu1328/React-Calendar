@@ -35,7 +35,7 @@ export const AddEventModal = ({open, handleClose, eventFormData, setEventFormDat
         }))
     }
 
-    const handleTodoChange = (e : React.SyntheticEvent, value: ITodo | null) => {
+    const handleTodoChange = ( : React.SyntheticEvent, value: ITodo | null) => {
         setEventFormData((prevState) => ({
             ...prevState,
             todoId: value?._id,
