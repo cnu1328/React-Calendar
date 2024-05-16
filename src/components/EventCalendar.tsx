@@ -122,7 +122,7 @@ const EventCalendar = () => {
     
     const [eventInfoModal, setEventInfoModal] = useState(false); // It is to open popup, when user clicks on existing event
 
-    const [events, setEvents] = useState<IEventInfo[]>(() => {
+    const [events, setEvents] = useState<IEventInfo[]>(() => { // This state is used to store all events
         const savedEvents = localStorage.getItem('events');
         if (savedEvents) {
             const parsedEvents = JSON.parse(savedEvents);
@@ -135,7 +135,7 @@ const EventCalendar = () => {
         return [];
     });
 
-    const [todos, setTodos] = useState<ITodo[]>(() => {
+    const [todos, setTodos] = useState<ITodo[]>(() => { // This state is used to store all todo colorings
         const savedTodos = localStorage.getItem('todos');
         return savedTodos ? JSON.parse(savedTodos) : [];
     });
