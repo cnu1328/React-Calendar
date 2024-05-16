@@ -1,0 +1,49 @@
+
+/* Customize the header */
+.rbc-header {
+    height: 50px; 
+    background-color: #0076DB; 
+    color: #fff; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.rbc-time-column .rbc-timeslot-group .rbc-label {
+    border-bottom: 1px solid #ddd; /* Horizontal lines for time slots */
+    border-top: 1px solid #ddd;
+}
+
+/* Customize the time labels */
+
+.rbc-timeslot-group {
+    background-color: #f9f9f9; /* Background color for time slots */
+}
+
+.rbc-time-content .rbc-time-column .rbc-timeslot-group .rbc-label {
+    color: #0076DB; 
+    font-weight: bold;
+}
+
+
+/* Remove horizontal grid lines */
+.rbc-time-content .rbc-time-column div {
+    border-bottom: none;
+}
+
+
+
+/* Retain vertical grid lines */
+.rbc-time-content > * + * > * {
+    border-left: 1px solid #ddd;
+}
+
+
+.rbc-allday-cell{
+    display: none;
+}
+
+.rbc-today {
+    background-color: #0b3254;
+}
