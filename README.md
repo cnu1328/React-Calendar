@@ -1,30 +1,29 @@
-# React + TypeScript + Vite
+# Introduction
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live demo](https://react-calendar-mu.vercel.app/)
 
-Currently, two official plugins are available:
+Built a calendar application using React and Material UI. This app will have features like dynamic event creation, todo list integration, and event color-coding. It's a great example of how to add complex functionalities to a React app. I used libraries like Material UI components, React Big Calendar, and date-fns for localized date formats.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
 
-## Expanding the ESLint configuration
+### Event Management
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Users can add, view, and manage events on the calendar.
+- Supports both slot-based and date-based event creation.
 
-- Configure the top-level `parserOptions` property like this:
+### Todo List Integration
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- Shows how to add a todo list to a calendar application.
+- Lets us to create todos and link them to events.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Event Color-Coding
+
+- Demonstrates how to color-code events dynamically based on associated todos or other criteria.
+
+### React Big Calendar
+
+- Uses the React Big Calendar library for main calendar functionalities.
+
+### Locale Support
+
+- Provides localized date formatting with the date-fns library.
