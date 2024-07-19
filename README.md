@@ -2,6 +2,9 @@
 
 [Live demo](https://react-calendar-mu.vercel.app/)
 
+<img width="942" alt="image" src="https://github.com/user-attachments/assets/87b4a730-9d72-4883-b62d-c178a9776653">
+
+
 Built a calendar application using React and Material UI. This app will have features like dynamic event creation, todo list integration, and event color-coding. It's a great example of how to add complex functionalities to a React app. I used libraries like Material UI components, React Big Calendar, and date-fns for localized date formats.
 
 ## Key Features
