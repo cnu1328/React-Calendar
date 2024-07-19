@@ -316,14 +316,14 @@ const EventCalendar = () => {
                           selectable
                           startAccessor="start"
                           endAccessor={"end"}
-                          defaultView="week"
-                          views={['week']}
+{/*                           defaultView="week" */}
+{/*                           views={['week']} */}
                           style={{
                               height: 900,
                           }}
                           
-                          min={new Date(2024, 0, 1, 9, 0, 0)} // Start time (9am)
-                          max={new Date(2024, 0, 1, 18, 0, 0)} // End time (6pm)
+{/*                           min={new Date(2024, 0, 1, 9, 0, 0)} // Start time (9am)
+                          max={new Date(2024, 0, 1, 18, 0, 0)} // End time (6pm) */}
 
                           components={{
                               week: {
